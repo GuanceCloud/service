@@ -77,6 +77,10 @@ const (
 	optionSessionCreateDefault = false
 	optionLogOutput            = "LogOutput"
 	optionLogOutputDefault     = false
+	optionRestartSec           = "RestartSec"
+	optionStartLimitInterval   = "StartLimitInterval"
+	optionStartLimitBurst      = "StartLimitBurst"
+	optionSuccessExitStatus    = "SuccessExitStatus"
 
 	optionRunWait      = "RunWait"
 	optionReloadSignal = "ReloadSignal"

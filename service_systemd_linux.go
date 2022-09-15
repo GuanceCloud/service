@@ -133,6 +133,9 @@ func (s *systemd) Install() error {
 		HasOutputFileSupport bool
 		ReloadSignal         string
 		PIDFile              string
+		StartLimitInterval   int
+		StartLimitBurst      int
+		RestartSec           int
 		LogOutput            bool
 	}{
 		s.Config,
@@ -140,6 +143,9 @@ func (s *systemd) Install() error {
 		s.hasOutputFileSupport(),
 		s.Option.string(optionReloadSignal, ""),
 		s.Option.string(optionPIDFile, ""),
+		s.Option.int(optionStartLimitInterval, 60),
+		s.Option.int(optionStartLimitBurst, 5),
+		s.Option.int(optionRestartSec, 120),
 		s.Option.bool(optionLogOutput, optionLogOutputDefault),
 	}
 
@@ -230,8 +236,8 @@ Description={{.Description}}
 ConditionFileIsExecutable={{.Path|cmdEscape}}
 
 [Service]
-StartLimitInterval=5
-StartLimitBurst=10
+{{if .StartLimitInterval}}StartLimitInterval={{.StartLimitInterval}}{{end}}
+{{if .StartLimitBurst}}StartLimitBurst={{.StartLimitBurst}}{{end}}
 ExecStart={{.Path|cmdEscape}}{{range .Arguments}} {{.|cmd}}{{end}}
 {{if .ChRoot}}RootDirectory={{.ChRoot|cmd}}{{end}}
 {{if .WorkingDirectory}}WorkingDirectory={{.WorkingDirectory|cmdEscape}}{{end}}
@@ -243,7 +249,7 @@ StandardOutput=file:/var/log/{{.Name}}.out
 StandardError=file:/var/log/{{.Name}}.err
 {{- end}}
 Restart=always
-RestartSec=120
+{{if .RestartSec}}RestartSec={{.RestartSec}}{{end}}
 EnvironmentFile=-/etc/sysconfig/{{.Name}}
 
 [Install]
