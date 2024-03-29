@@ -89,8 +89,8 @@ const (
 	optionRestartSec         = "RestartSec"
 	optionStartLimitInterval = "StartLimitInterval"
 	optionStartLimitBurst    = "StartLimitBurst"
-	optionCPUQuota    = "CPUQuota"
-	optionMemoryLimit    = "MemoryLimit"
+	optionCPUQuota           = "CPUQuota"
+	optionMemoryLimit        = "MemoryLimit"
 	optionSuccessExitStatus  = "SuccessExitStatus"
 
 	optionSystemdScript = "SystemdScript"

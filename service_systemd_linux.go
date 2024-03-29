@@ -172,7 +172,7 @@ func (s *systemd) Install() error {
 		StartLimitInterval   int
 		StartLimitBurst      int
 		RestartSec           int
-		CPUQuota			 string
+		CPUQuota             string
 		MemoryLimit          string
 		SuccessExitStatus    string
 		LogOutput            bool
